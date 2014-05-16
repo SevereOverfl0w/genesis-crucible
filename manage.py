@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask.ext.script import Manager, Server
 from crucible import app
 
