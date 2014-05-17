@@ -14,9 +14,11 @@ ko.bindingHandlers.editableText = {
     }
 };
 
-function AppViewModel(){
-    this.ip = ko.observable("cru.ci");
-    this.title = ko.observable("Welcome to Crucible");
-}
+$.getJSON("/store", function(data) {
+    var storeViewModel = {};
+    for (var key in data) {
+        storeViewModel[key] = ko.observable(data[key]);
+    }
+    ko.applyBindings(storeViewModel);
+});
 
-ko.applyBindings(new AppViewModel());
