@@ -13,12 +13,16 @@ ko.bindingHandlers.editableText = {
         $(element).text(value);
     }
 };
+    
+var storeViewModel = {};
 
 $.getJSON("/store", function(data) {
-    var storeViewModel = {};
     for (var key in data) {
         storeViewModel[key] = ko.observable(data[key]);
     }
     ko.applyBindings(storeViewModel);
 });
 
+$('#save').click(function(){
+    $.post("/store/", ko.toJSON(storeViewModel));
+});

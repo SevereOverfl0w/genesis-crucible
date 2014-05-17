@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask.ext.classy import FlaskView
 from flask.json import jsonify
 
@@ -16,6 +16,13 @@ store = {
 class StoreView(FlaskView):
     def index(self):
         return jsonify(store)
+    def post(self):
+        new = request.get_json(force=True)
+        print new
+        for key, value in new.iteritems():
+            store[key] = value
+        return jsonify(store)
+
 
 StoreView.register(app)
 
