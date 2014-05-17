@@ -1,8 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask.ext.classy import FlaskView
 from flask.json import jsonify
 
 app = Flask(__name__)
+app.config['DEBUG'] = True 
 
 # A key/value store.
 store = {
@@ -17,3 +18,7 @@ class StoreView(FlaskView):
         return jsonify(store)
 
 StoreView.register(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
